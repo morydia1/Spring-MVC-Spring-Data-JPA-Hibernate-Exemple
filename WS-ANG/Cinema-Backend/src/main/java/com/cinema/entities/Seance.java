@@ -1,6 +1,5 @@
 package com.cinema.entities;
 
-import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -19,7 +18,7 @@ import lombok.ToString;
 public class Seance {
 	
        @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-		private Long id;
+       private Long id;
        @Temporal(TemporalType.TIME)
-		private Date heureDebut;
+       private Date heureDebut;
 }

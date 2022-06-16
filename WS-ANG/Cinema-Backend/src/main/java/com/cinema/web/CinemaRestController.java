@@ -1,6 +1,6 @@
 package com.cinema.web;
 
-import java.awt.PageAttributes.MediaType;
+//import java.awt.PageAttributes.MediaType;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -11,6 +11,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,30 +33,30 @@ public class CinemaRestController {
 	@Autowired
 	private TicketRepository ticketRepository;
 	
-	@GetMapping(path="/imageFilms/{id}",produces=org.springframework.http.MediaType.IMAGE_JPEG_VALUE)
+	@GetMapping(path="/imageFilms/{id}",produces= MediaType.IMAGE_JPEG_VALUE)
 	public byte[] image(@PathVariable(name="id")Long id) throws Exception{
 		Film f=FilmRepository.findById(id).get();
 		String photoName=f.getPhoto();
-		File file=new File(System.getProperty("user.home")+"/"+photoName);
+		File file=new File(System.getProperty("user.home")+"/Documents/tp Spring Angular/images/cinema/"+photoName);
 		Path path =Paths.get(file.toURI());
 				return Files.readAllBytes(path);
 	}
+
 	@PostMapping("/payerTickets")
 	@Transactional
-public List<Ticket> payerTickets(@RequestBody TicketForm ticketForm){
+	public List<Ticket> payerTickets(@RequestBody TicketForm ticketForm){
 		List<Ticket> listTicket =new ArrayList<>();
 		
-	    ticketForm.getTickets().forEach(id->{
+		ticketForm.getTickets().forEach(id->{
 		Ticket ticket =ticketRepository.findById(id).get();
 		ticket.setNomClient(ticketForm.getNomClient());
 		ticket.setReserve(true);
 		ticketRepository.save(ticket);
 		listTicket.add(ticket);		
-		
-	});
-	    return listTicket;
-}
+		});
+		return listTicket;
 	}
+}
 @Data 
 class TicketForm{
 	private String nomClient;

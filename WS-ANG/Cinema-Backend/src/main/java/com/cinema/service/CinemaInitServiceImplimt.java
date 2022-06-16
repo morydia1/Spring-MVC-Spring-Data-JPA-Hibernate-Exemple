@@ -138,14 +138,15 @@ public class CinemaInitServiceImplimt implements ICinemaInitService {
 
 	@Override
 	public void initFilms() {
-		double[] durees=new double[] {1,1.5,2,2.5,3};
+		double[] durees =new double[] {1,1.5,2,2.5,3};   
 		List<Categorie> categories=categorieRepository.findAll();
-		Stream.of("Lord of War","Dark Knight Rises","Joker","Super Man").forEach(TitreFilm->{
+		Stream.of("Jurracic World","Doctor Strange","Ducobu","Champagne","Yakuza","Black Widow","Free Guy",
+				"Avatar","Fast Furious","Film").forEach(TitreFilm->{
 		Film film=new Film();
 		film.setTitre(TitreFilm);
-		film.setDuree(1.5);
-		film.setPhoto(TitreFilm.replace(" ","")+".jpeg");
-		//film.setCategorie(categories.get(new Random().nextInt(categories.size())));
+		film.setDuree(durees[new Random().nextInt(durees.length)]);
+		film.setPhoto(TitreFilm.replace(" ","_")+".jpeg");
+		film.setCategorie(categories.get(new Random().nextInt(categories.size())));
 		filmRepository.save(film);
 		
 		});
@@ -164,7 +165,7 @@ public class CinemaInitServiceImplimt implements ICinemaInitService {
 							Projection projection=new Projection();
 							projection.setDateProjection(new Date());
 							projection.setFilm(film);
-							projection.setPrix(50.00);
+							projection.setPrix(prices[new Random().nextInt(prices.length)]);
 							projection.setSalle(salle);
 							projection.setSeance(seance);
 							projectionRepository.save(projection);

@@ -1,7 +1,6 @@
 package com.cinema.entities;
 
 import java.io.Serializable;
-import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -30,6 +29,6 @@ public class Ticket implements Serializable {
 	@ManyToOne
 	private Place place;
 	@ManyToOne
-	@JsonProperty(access=Access.WRITE_ONLY)
+	//@JsonProperty(access=Access.WRITE_ONLY)
 	private Projection projection;
 }
