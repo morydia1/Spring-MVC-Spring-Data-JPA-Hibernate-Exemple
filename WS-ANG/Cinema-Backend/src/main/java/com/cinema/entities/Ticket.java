@@ -29,6 +29,6 @@ public class Ticket implements Serializable {
 	@ManyToOne
 	private Place place;
 	@ManyToOne
-	//@JsonProperty(access=Access.WRITE_ONLY)
+	@JsonProperty(access=Access.WRITE_ONLY)
 	private Projection projection;
 }
