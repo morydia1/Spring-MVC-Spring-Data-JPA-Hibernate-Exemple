@@ -12,6 +12,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,6 +28,7 @@ import lombok.Data;
 
 
 @RestController
+@CrossOrigin("*")
 public class CinemaRestController {
 	@Autowired
 	private FilmRepository FilmRepository;
@@ -45,6 +47,8 @@ public class CinemaRestController {
 	@PostMapping("/payerTickets")
 	@Transactional
 	public List<Ticket> payerTickets(@RequestBody TicketForm ticketForm){
+		System.out.println(ticketForm);
+		
 		List<Ticket> listTicket =new ArrayList<>();
 		
 		ticketForm.getTickets().forEach(id->{
@@ -60,5 +64,6 @@ public class CinemaRestController {
 @Data 
 class TicketForm{
 	private String nomClient;
+	private String code;
 	private List<Long> tickets=new ArrayList<>();
 }

@@ -12,7 +12,7 @@ public double getPrix();
 public Date getDateProjection();
 public Salle getSalle();
 public Film getFilm();
-public Seance getseance();
+public Seance getSeance();
 public Collection<Ticket> getTickets();
 
 
